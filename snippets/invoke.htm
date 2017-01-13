@@ -8,12 +8,9 @@
                   'undo redo | fontselect fontsizeselect | bullist numlist outdent indent blockquote removeformat'
                ],
       menubar: false,
-      file_picker_callback: function(callback, value, meta) {
-                              if (meta.filetype == 'image') {
-                                alert("BANG! - " + callback + " - " + value);
-                                myImageBrowser();
-                              }
-                            }
+      file_browser_callback: browseServerImages,
+      document_base_url: '/bl-content/uploads/',
+      relative_urls: true
     });
   });
 
@@ -21,7 +18,26 @@
     tinymce.activeEditor.execCommand('mceInsertContent', false, "Boom '" + filename + "'");
   }
 
-  function myImageBrowser() {
-    alert('BOOOOOOOOOM!');
+  function browseServerImages(field_name, url, type, win) {
+    if (type == 'image') {
+      tinyMCE.activeEditor.windowManager.open(
+        {
+          file: '/bl-plugins/tidyMCE/imagebrowse.php',
+          title: 'Images',
+          width: 600,
+          height: 400,
+          resizable: 'yes',
+          plugins: 'media',
+          inline: 'yes',
+          close_previous: 'no'
+        }, 
+        {
+          window: win,
+          input: field_name
+        }
+      );
+    }
+
+    return false;
   }
 </script>
