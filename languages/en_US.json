@@ -1,0 +1,7 @@
+{
+    "plugin-data":
+    {
+	"name": "tidyMCE",
+	"description": "a Bludit plugin which wraps up TinyMCE."
+    }
+}

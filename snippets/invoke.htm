@@ -1,0 +1,27 @@
+<script>
+  $(document).ready(function() {
+    tinymce.init({
+      selector: '#jscontent',
+      plugins: 'code emoticons link codesample image lists',
+      toolbar: [
+                  'cut copy paste | formatselect bold italic underline strikethrough subscript superscript | alignleft aligncenter  alignright | link image codesample emoticons | code removeformat', 
+                  'undo redo | fontselect fontsizeselect | bullist numlist outdent indent blockquote removeformat'
+               ],
+      menubar: false,
+      file_picker_callback: function(callback, value, meta) {
+                              if (meta.filetype == 'image') {
+                                alert("BANG! - " + callback + " - " + value);
+                                myImageBrowser();
+                              }
+                            }
+    });
+  });
+
+  function editorAddImage(filename) {
+    tinymce.activeEditor.execCommand('mceInsertContent', false, "Boom '" + filename + "'");
+  }
+
+  function myImageBrowser() {
+    alert('BOOOOOOOOOM!');
+  }
+</script>
