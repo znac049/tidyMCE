@@ -1,0 +1,20 @@
+<script src="/bl-plugins/tidyMCE/js/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+  $(".tidymde-picker").click(function(){
+    alert("Click!");
+    setSelection('/bilbo.png');
+  });
+});
+
+function setSelection(name) {
+  var args = top.tinymce.activeEditor.windowManager.getParams();
+
+  win = (args.window);
+  input = (args.input);
+
+  win.document.getElementById(input).value = '/bilbo.png';
+
+  top.tinymce.activeEditor.windowManager.close();
+};
+</script>
