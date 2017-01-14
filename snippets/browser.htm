@@ -2,9 +2,14 @@
 <script>
 $(document).ready(function(){
   $(".tidymde-picker").click(function(){
-    alert("Click!");
-    setSelection('/bilbo.png');
+    var url = $(this).attr("src");
+    setSelection(url);
   });
+
+  $(".tidy-inline").hover(
+    function() { $(this).addClass("tidy-hover"); },
+    function() { $(this).removeClass("tidy-hover"); }
+  )
 });
 
 function setSelection(name) {
@@ -13,7 +18,8 @@ function setSelection(name) {
   win = (args.window);
   input = (args.input);
 
-  win.document.getElementById(input).value = '/bilbo.png';
+  name = name.replace('/thumbnails', '');
+  win.document.getElementById(input).value = name;
 
   top.tinymce.activeEditor.windowManager.close();
 };

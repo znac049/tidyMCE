@@ -1,0 +1,18 @@
+.tidy-inline {
+    float: left;
+    width: 150px;
+    height: 150px;
+    margin: 2px;
+
+    text-align: center;
+
+    border: 2px solid #eee;
+    margin: 4px;
+}
+
+.tidymde-picker {
+}
+
+.tidy-hover {
+    border: 2px solid red;
+}
