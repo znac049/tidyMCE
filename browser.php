@@ -15,10 +15,10 @@
     $(document).ready(function(){
       var url = "/bl-plugins/tidyMCE/browser/images.php?type=image&folder=uploads";
 
-      loadInnerBrowser(url);
+      loadInnerBrowser(url, 'uploads');
     });
 
-    function loadInnerBrowser(url) {
+    function loadInnerBrowser(url, title) {
       $("#tidy-browser").load(url, function() {
         $(".tidymde-picker").click(function(){
           var url = $(this).attr("src");
@@ -36,7 +36,7 @@
         )
       });
 
-      setTitle("Pippi");
+      setTitle(title);
     }
 
     function setSelection(name) {
@@ -51,20 +51,23 @@
       top.tinymce.activeEditor.windowManager.close();
     };
 
-    function setTitle(title) {
-      $(".mce-title").each(function() {
-        $(this).text("Bilbo");
-      });
-    }
-
     function changeFolder(dest) {
       var url = "/bl-plugins/tidyMCE/browser/images.php?type=image&folder=" + dest;
 
-      loadInnerBrowser(url);
+      loadInnerBrowser(url, dest);
     }
 
-    function dbg(msg) {
-      alert(msg);
+    function setTitle(title) {
+      var args = top.tinymce.activeEditor.windowManager.getParams();
+      var divs;
+
+      win = (args.window);
+      divs = win.document.getElementsByClassName("mce-title");
+
+      // There should be two divs found, the "Insert Image" dialog and the 
+      // Browser dialog. We rely on ours being the last item in the
+      // array.
+      divs[divs.length - 1].innerText = title;
     }
   </script> 
 </html>

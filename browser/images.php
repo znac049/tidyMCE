@@ -88,12 +88,13 @@ class imageBrowser {
 
   private function findImages($relativeDir) 
   {
+    $folders = [];
+    $images = [];
+
     if (!is_dir(CONTENT_DIR . DS . $relativeDir)) {
       echo 'No image folder found';
       return null;
     }
-
-    echo '<h1>' . $relativeDir . '</h1>';
 
     $pfx = CONTENT_DIR . DS;
 
@@ -103,7 +104,7 @@ class imageBrowser {
       $fullName = $pfx . $relativeDir . DS . $file;
 
       if (is_dir($fullName)) {
-	$this->showFolder($pfx, $relFile);
+	$folders[] = $relFile;
       }
       else if ($this->isImageFile($fullName)) {
 	$thumbFile = $relativeDir . DS . 'thumbnails' . DS . $file;
@@ -111,11 +112,21 @@ class imageBrowser {
 	  $thumbFile = $relFile;
 	}
 
-	$this->showImage($pfx, $thumbFile);
+	$images[] = $thumbFile;
       }
     }
 
     closedir($dir);
+
+    sort($folders);
+    foreach ($folders as $folder) {
+      $this->showFolder($pfx, $folder);
+    }
+
+    sort($images);
+    foreach ($images as $image) {
+      $this->showImage($pfx, $image);
+    }
   }  
 }
 
