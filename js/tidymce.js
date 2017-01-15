@@ -1,10 +1,10 @@
 $(document).ready(function() {
   tinymce.init({
     selector: '#jscontent',
-    plugins: 'code emoticons link codesample image lists',
+    plugins: 'code emoticons link codesample image lists table',
     toolbar: [
                 'cut copy paste | formatselect bold italic underline strikethrough subscript superscript | alignleft aligncenter  alignright | link image codesample emoticons | code removeformat', 
-                'undo redo | fontselect fontsizeselect | bullist numlist outdent indent blockquote removeformat'
+                'undo redo | fontselect fontsizeselect | bullist numlist outdent indent blockquote | table'
              ],
     menubar: false,
     file_browser_callback: browseServerImages,
@@ -14,7 +14,7 @@ $(document).ready(function() {
 });
 
 function editorAddImage(filename) {
-  tinymce.activeEditor.execCommand('mceInsertContent', false, "Boom '" + filename + "'");
+  tinymce.activeEditor.execCommand('mceInsertContent', false, '<img src="/bl-content/uploads/' + filename + '"></img>');
 }
 
 function browseServerImages(field_name, url, type, win) {
