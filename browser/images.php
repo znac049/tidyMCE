@@ -50,7 +50,7 @@ class imageBrowser {
     }
 
 ?>
-    <div class="tidy-inline">
+    <div class="tidy-inline" data-folder="pippi">
       <img src="/bl-plugins/tidyMCE/images/open_folder_yellow.png"></img>
       <br/><?= basename($relativeName) ?>
     </div>
@@ -104,12 +104,5 @@ class imageBrowser {
     echo file_get_contents(__DIR__ . DS . 'snippets/browser.htm');
   }  
 }
-?><!DOCTYPE html>
-<html>
-  <head>
-    <link rel="stylesheet" type="text/css" href="/bl-plugins/tidyMCE/css/browser.css">
-  </head>
-  <body>
-    <?php new imageBrowser(); ?>
-  </body>
-</html>
+
+new ImageBrowser();

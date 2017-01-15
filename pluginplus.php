@@ -60,16 +60,4 @@ class PluginPlus extends Plugin
 
     return $js;
   }
-
-  protected function snippet($name)
-  {
-    $snippet = $this->phpPath() . 'snippets' . DS . $name;
-
-    $contents = file_get_contents($snippet);
-    if ($contents === false) {
-      $contents = '';
-    }
-
-    return $contents;
-  }
 }

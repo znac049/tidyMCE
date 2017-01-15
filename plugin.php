@@ -17,7 +17,7 @@ class pluginTidyMCE extends PluginPlus
       return '';
     }
 
-    return $this->script($this->htmlPath().'js/tinymce.min.js');
+    return $this->script($this->htmlPath() . 'js/tinymce.min.js');
   }
 
   public function adminBodyEnd()
@@ -26,6 +26,6 @@ class pluginTidyMCE extends PluginPlus
       return '';
     }
 
-    return $this->snippet('invoke.htm');
+    return $this->script($this->htmlPath() . 'js/tidymce.js');
   }
 }
