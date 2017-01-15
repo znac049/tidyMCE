@@ -51,6 +51,7 @@ class imageBrowser {
   {
     $dir = basename($relativeName);
     $image = 'open_folder.png';
+    $dest = $relativeName;
 
     if ($dir === '..') {
       $crumbs = explode('/', $relativeName);
@@ -60,13 +61,14 @@ class imageBrowser {
       }
 
       $image = 'parent_folder.png';
+      $dest = dirname(dirname($dest));
     }
     else if ((substr($dir, 0, 1) == '.') or ($dir == 'thumbnails')) {
       return;
     }
 
 ?>
-    <div class="tidy-inline" data-folder="<?= $relativeName ?>">
+    <div class="tidy-inline" data-folder="<?= $dest ?>">
       <img class="tidymde-folder" src="/bl-plugins/tidyMCE/images/<?= $image ?>"></img>
       <br/><?= $dir ?>
     </div>

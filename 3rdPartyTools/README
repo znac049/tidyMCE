@@ -1,0 +1,7 @@
+This is the version of TinyMCE used by this plugin. The plugin
+only uses some of the plugins, so I've only extracted the ones
+I need. You can safely delete this directory as the plugin does 
+not need it; it is included here to comply with the terms of
+GPLv2.
+
+Bob Green, 15th Jan 2017.
