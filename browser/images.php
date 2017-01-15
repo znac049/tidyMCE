@@ -22,7 +22,13 @@ class imageBrowser {
 
   private function getCurrentDir()
   {
-    return 'uploads';
+    $pwd = $_GET['folder'];
+
+    if (!$pwd) {
+      $pwd = 'uploads';
+    }
+
+    return $pwd;
   }
 
   private function isImageFile($name)
@@ -44,15 +50,25 @@ class imageBrowser {
   private function showFolder($pfx, $relativeName)
   {
     $dir = basename($relativeName);
+    $image = 'open_folder.png';
 
-    if ((substr($dir, 0, 1) == '.') or ($dir == 'thumbnails')) {
+    if ($dir === '..') {
+      $crumbs = explode('/', $relativeName);
+
+      if (count($crumbs) <= 2) {
+	return;
+      }
+
+      $image = 'parent_folder.png';
+    }
+    else if ((substr($dir, 0, 1) == '.') or ($dir == 'thumbnails')) {
       return;
     }
 
 ?>
-    <div class="tidy-inline" data-folder="pippi">
-      <img src="/bl-plugins/tidyMCE/images/open_folder_yellow.png"></img>
-      <br/><?= basename($relativeName) ?>
+    <div class="tidy-inline" data-folder="<?= $relativeName ?>">
+      <img class="tidymde-folder" src="/bl-plugins/tidyMCE/images/<?= $image ?>"></img>
+      <br/><?= $dir ?>
     </div>
 <?php
   }
@@ -100,8 +116,6 @@ class imageBrowser {
     }
 
     closedir($dir);
-
-    echo file_get_contents(__DIR__ . DS . 'snippets/browser.htm');
   }  
 }
 

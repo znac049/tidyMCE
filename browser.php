@@ -13,7 +13,7 @@
   <script src="/bl-plugins/tidyMCE/js/jquery.min.js"></script>
   <script>
     $(document).ready(function(){
-      var url = "/bl-plugins/tidyMCE/browser/images.php?name=Bilbo";
+      var url = "/bl-plugins/tidyMCE/browser/images.php?type=image&folder=uploads";
 
       loadInnerBrowser(url);
     });
@@ -23,6 +23,11 @@
         $(".tidymde-picker").click(function(){
           var url = $(this).attr("src");
           setSelection(url);
+        });
+
+        $(".tidymde-folder").click(function(){
+          var folder = $(this).closest("div").attr("data-folder");
+	  changeFolder(folder);
         });
 
         $(".tidy-inline").hover(
@@ -50,6 +55,16 @@
       $(".mce-title").each(function() {
         $(this).text("Bilbo");
       });
+    }
+
+    function changeFolder(dest) {
+      var url = "/bl-plugins/tidyMCE/browser/images.php?type=image&folder=" + dest;
+
+      loadInnerBrowser(url);
+    }
+
+    function dbg(msg) {
+      alert(msg);
     }
   </script> 
 </html>
