@@ -1,10 +1,10 @@
 $(document).ready(function() {
   tinymce.init({
     selector: '#jscontent',
-    plugins: 'code emoticons link codesample image lists table',
+    plugins: 'code emoticons link codesample image lists table lightbox',
     toolbar: [
                 'cut copy paste | formatselect bold italic underline strikethrough subscript superscript | alignleft aligncenter  alignright | link image codesample emoticons | code removeformat', 
-                'undo redo | fontselect fontsizeselect | bullist numlist outdent indent blockquote | table'
+                'undo redo | fontselect fontsizeselect | bullist numlist outdent indent blockquote | table | lightbox'
              ],
     menubar: false,
     file_browser_callback: browseServerImages,

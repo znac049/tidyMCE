@@ -11,13 +11,25 @@ class pluginTidyMCE extends PluginPlus
 		    'edit-post',
 		    'edit-page'];
 
+  public function siteHead() {
+    $html = $this->css($this->htmlPath() . 'js/lightbox/css/lightbox.css') .
+            $this->script($this->htmlPath() . 'js/jquery.min.js');
+            $this->script($this->htmlPath() . 'js/lightbox/js/lightbox.js');
+
+    return $html;
+  }
+
   public function adminHead()
   {
     if (!$this->pageNeedsMe) {
       return '';
     }
 
-    return $this->script($this->htmlPath() . 'js/tinymce.min.js');
+    $html = $this->css($this->htmlPath() . 'js/lightbox/css/lightbox.css') .
+            $this->script($this->htmlPath() . 'js/tinymce.min.js') .
+            $this->script($this->htmlPath() . 'js/lightbox/js/lightbox.js');
+
+    return $html;
   }
 
   public function adminBodyEnd()

@@ -50,8 +50,14 @@ class PluginPlus extends Plugin
     return $html;
   }
 
-  protected function script($name) {
+  protected function script($name)
+{
     return $this->tag('script', '', ['src' => $name]);
+  }
+
+  protected function css($name)
+  {
+    return $this->tag('link', '', ['rel' => 'stylesheet', 'type' => 'text/css', 'href' => $name], false);
   }
 
   protected function jqElement($idOrClass)
