@@ -1,5 +1,6 @@
 tinymce.PluginManager.add('lightbox', function(editor, url) {
   var groupId = 0;
+  var imagePrefix = '/bl-content/uploads/';
 
   function genGroupName() {
     groupId++;
@@ -7,16 +8,59 @@ tinymce.PluginManager.add('lightbox', function(editor, url) {
     return 'lb' + groupId;
   }
 
+  function tidyPath(src) {
+    console.log("tidyPath() called with '" + src + "'");
+
+    if (src.indexOf(imagePrefix) == 0) {
+      src = src.substr(imagePrefix.length);
+    }
+
+    console.log("tidyPath='" + src + "'");
+
+    return src;
+  }
+
+  function thumbPath(src) {
+    var sep = src.lastIndexOf('/');
+    var name;
+    var prefix = '/bl-content/uploads/';
+
+    console.log("thumbPath() called with '" + src + "'");
+
+    if (sep == -1) {
+      src = 'thumbnails/' + src;
+
+      console.log("Thumb (no sep): " + src);
+      return src;
+    }
+
+    name = src.substr(sep+1);
+    src = src.substr(0, sep+1);
+
+    src += 'thumbnails/' + name;
+
+    if (src.indexOf(prefix + prefix) == 0) {
+      src = src.substr(prefix.length);
+    }
+
+    console.log("thumbPath='" + src + "'");
+
+    return src;
+  }
+
   function genElems(form) {
-    var html = '<a href="' + form.src + '" ' +
+    var img = tidyPath(form.src);
+    var thumb = thumbPath(img);
+
+    var html = '<a class="lightbox-href" href="#" ' +
                   'data-lightbox="' + genGroupName() + '" ' +
+	          'data-tidy-src="' + img + '" ' +
                   'data-title="Pippi">';
 
-    html += '<img src="' + form.src + '"></img>';
+    html += '<img class="lightbox-img" src="/bl-plugins/tidyMCE/images/singleframe.png" ' +
+                  'data-tidy-src="' + thumb + '">';
 
-    html += '</a>';
-
-    alert("Woo: " + form.src);
+    html += '</img></a>';
 
     return html;
   } 

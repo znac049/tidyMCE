@@ -13,8 +13,14 @@ class pluginTidyMCE extends PluginPlus
 
   public function siteHead() {
     $html = $this->css($this->htmlPath() . 'js/lightbox/css/lightbox.css') .
-            $this->script($this->htmlPath() . 'js/jquery.min.js');
+            $this->script($this->htmlPath() . 'js/jquery.min.js') .
             $this->script($this->htmlPath() . 'js/lightbox/js/lightbox.js');
+
+    return $html;
+  }
+
+  public function siteBodyEnd() {
+    $html = $this->script($this->htmlPath() . 'js/mungelightbox.js');
 
     return $html;
   }
