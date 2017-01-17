@@ -51,11 +51,18 @@ tinymce.PluginManager.add('lightbox', function(editor, url) {
   function genElems(form) {
     var img = tidyPath(form.src);
     var thumb = thumbPath(img);
+    var title = form.title;
+
+    if (title.length == 0) {
+      title = 'Untitled';
+    }
+
+    console.log("Title='" + title + "'");
 
     var html = '<a class="lightbox-href" href="#" ' +
                   'data-lightbox="' + genGroupName() + '" ' +
 	          'data-tidy-src="' + img + '" ' +
-                  'data-title="Pippi">';
+                  'data-title="' + title + '">';
 
     html += '<img class="lightbox-img" src="/bl-plugins/tidyMCE/images/singleframe.png" ' +
                   'data-tidy-src="' + thumb + '">';
